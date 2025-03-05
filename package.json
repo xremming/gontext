@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Go-like context for TypeScript and JavaScript.",
   "type": "module",
-  "main": "index.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
   "scripts": {
     "test": "vitest --typecheck",
     "lint": "eslint index.ts index.test.ts",
@@ -21,5 +24,11 @@
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.0",
     "vitest": "^3.0.7"
-  }
+  },
+  "files": [
+    "package.json",
+    "LICENSE",
+    "dist/index.js",
+    "dist/index.d.ts"
+  ]
 }

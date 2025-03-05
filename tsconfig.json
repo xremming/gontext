@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["ES2018", "DOM"],
+    "module": "ESNext",
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
