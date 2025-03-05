@@ -17,6 +17,9 @@
     "state"
   ],
   "author": "Maximilian Remming <maximilian@remming.fi>",
+  "repository": {
+    "url": "https://github.com/xremming/gontext"
+  },
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "9.21.0",
