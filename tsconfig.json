@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2018", "DOM"],
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "files": ["index.ts"]
+}

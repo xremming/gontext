@@ -1,0 +1,25 @@
+{
+  "name": "gontext",
+  "version": "1.0.0",
+  "description": "Go-like context for TypeScript and JavaScript.",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "vitest --typecheck",
+    "lint": "eslint index.ts index.test.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "context",
+    "state"
+  ],
+  "author": "Maximilian Remming <maximilian@remming.fi>",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0",
+    "vitest": "^3.0.7"
+  }
+}
