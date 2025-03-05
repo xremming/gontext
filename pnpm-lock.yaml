@@ -9,19 +9,19 @@ importers:
   .:
     devDependencies:
       '@eslint/js':
-        specifier: ^9.21.0
+        specifier: 9.21.0
         version: 9.21.0
       eslint:
-        specifier: ^9.21.0
+        specifier: 9.21.0
         version: 9.21.0
       typescript:
-        specifier: ^5.8.2
+        specifier: 5.8.2
         version: 5.8.2
       typescript-eslint:
-        specifier: ^8.26.0
+        specifier: 8.26.0
         version: 8.26.0(eslint@9.21.0)(typescript@5.8.2)
       vitest:
-        specifier: ^3.0.7
+        specifier: 3.0.7
         version: 3.0.7
 
 packages:
