@@ -1,6 +1,6 @@
 {
   "name": "gontext",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Go-like context for TypeScript and JavaScript.",
   "type": "module",
   "exports": {
