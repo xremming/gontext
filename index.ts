@@ -109,7 +109,10 @@ export const Context = {
   /**
    * Call the given function `fn` with a timeout of `ms` milliseconds. The context
    * passed to the function will be extended with an `AbortController` and an
-   * `AbortSignal` that will be aborted if the timeout is reached.
+   * `AbortSignal` that will be aborted with `TimeoutError` if the timeout is reached.
+   *
+   * It is up to the function to handle checking whether the signal has been aborted
+   * and handle it accordingly.
    *
    * @param ctx The context that will be passed to the function. If `null`, a new
    * context will be created.
@@ -120,18 +123,15 @@ export const Context = {
   withTimeout: <T>(
     ctx: Context | null,
     ms: number,
-    fn: (ctx: Context) => Promise<T>
+    fn: (ctx: Context) => Promise<T>,
   ): Promise<T> => {
     const [result, abort] = Context.withAbort(ctx, fn);
 
-    return new Promise<T>((resolve, reject) => {
-      const timeoutId = setTimeout(() => {
-        abort();
-        reject(new TimeoutError());
-      }, ms);
+    const timeoutId = setTimeout(() => {
+      abort(new TimeoutError());
+    }, ms);
 
-      result.then(resolve, reject).finally(() => clearTimeout(timeoutId));
-    });
+    return result.finally(() => clearTimeout(timeoutId));
   },
 };
 

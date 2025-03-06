@@ -156,12 +156,20 @@ describe("Context.withTimeout", () => {
     });
   });
 
-  it("should throw a TimeoutError when the timeout is reached", async () => {
-    const result = Context.withTimeout(null, 0, async () => {
-      await vi.waitUntil(() => false);
+  it("should not throw when the timeout is reached", async () => {
+    await Context.withTimeout(null, 0, async (ctx) => {
+      const signal = getSignal(ctx);
+      await vi.waitUntil(() => signal.aborted);
     });
+  });
 
-    assert.instanceOf(await result.catch((error) => error), TimeoutError);
+  it("should have the abort reason as TimeoutError when the timeout is reached", async () => {
+    await Context.withTimeout(null, 0, async (ctx) => {
+      const signal = getSignal(ctx);
+      await vi.waitUntil(() => signal.aborted);
+
+      assert.instanceOf(signal.reason, TimeoutError);
+    });
   });
 });
 
