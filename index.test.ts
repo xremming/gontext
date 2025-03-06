@@ -42,6 +42,19 @@ describe("Context.TODO", () => {
   });
 });
 
+describe("Context.background", () => {
+  it("should return an empty context", () => {
+    const ctx = Context.background();
+    assert.deepEqual(ctx, {} as Context);
+  });
+
+  it("should return a new object each time", () => {
+    const ctx1 = Context.background();
+    const ctx2 = Context.background();
+    assert.notEqual(ctx1, ctx2);
+  });
+});
+
 describe("Context.compose", () => {
   const [getA, setA] = make<number>("a");
   const [getB, setB] = make<number>("b", () => 0);

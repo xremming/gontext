@@ -29,6 +29,17 @@ export const Context = {
   },
 
   /**
+   * background returns a new empty context. It is never aborted, has no values,
+   * and has no timeout. It is typically used by the main function, initialization,
+   * and tests, and as the top-level Context for incoming requests.
+   *
+   * @returns A new empty context.
+   */
+  background: (): Context => {
+    return {} as Context;
+  },
+
+  /**
    * Use the list of tuples to set multiple values in the context in a single call.
    *
    * @param ctx The context which will be used as the base context.
