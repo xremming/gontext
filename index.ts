@@ -54,7 +54,7 @@ export const Context = {
   ): Context => {
     return setters.reduce(
       (ctx, [withValue, value]) => withValue(ctx, value),
-      ctx ?? Context.TODO()
+      ctx
     );
   },
 
