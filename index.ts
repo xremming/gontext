@@ -71,11 +71,10 @@ export const Context = {
    * @param fn The function to call.
    * @returns A tuple containing the result promise and the abort function.
    */
-  withAbort: <T>(
+  withAbort: <T, R = unknown>(
     ctx: Context | null,
     fn: (ctx: Context) => Promise<T>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): [result: Promise<T>, abort: (reason?: any) => void] => {
+  ): [result: Promise<T>, abort: (reason?: R) => void] => {
     ctx = ctx ?? Context.TODO();
 
     // We specifically use the `getAbortController` function here because the
@@ -84,10 +83,8 @@ export const Context = {
     const prevAbortController = getAbortController(ctx);
     const abortController = new AbortController();
 
-    const abort = abortController.abort.bind(abortController) as (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      reason?: any,
-    ) => void;
+    const abort =
+      abortController.abort.bind<(reason?: R) => void>(abortController);
 
     if (prevAbortController) {
       prevAbortController.signal.addEventListener("abort", () => {
@@ -120,18 +117,18 @@ export const Context = {
    * @param fn The function to call.
    * @returns A promise that resolves with the result of the function.
    */
-  withTimeout: <T>(
+  withTimeout: <T, R = unknown>(
     ctx: Context | null,
     ms: number,
     fn: (ctx: Context) => Promise<T>,
-  ): Promise<T> => {
-    const [result, abort] = Context.withAbort(ctx, fn);
+  ): [result: Promise<T>, abort: (reason?: R) => void] => {
+    const [result, abort] = Context.withAbort<T, R | TimeoutError>(ctx, fn);
 
     const timeoutId = setTimeout(() => {
       abort(new TimeoutError());
     }, ms);
 
-    return result.finally(() => clearTimeout(timeoutId));
+    return [result.finally(() => clearTimeout(timeoutId)), abort];
   },
 };
 

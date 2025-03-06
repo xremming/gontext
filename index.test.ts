@@ -112,6 +112,7 @@ describe("Context.withAbort", () => {
     const [result, abort] = Context.withAbort(null, async (ctx) => {
       const signal = getSignal(ctx);
       assert.isFalse(signal.aborted);
+      assert.isUndefined(signal.reason);
 
       await vi.waitUntil(() => signal.aborted);
 
@@ -144,9 +145,10 @@ describe("Context.withAbort", () => {
 });
 
 describe("Context.withTimeout", () => {
-  it("should return a promise", () => {
-    const result = Context.withTimeout(null, 1000, async () => {});
+  it("should return a promise and an abort function", () => {
+    const [result, abort] = Context.withTimeout(null, 1000, async () => {});
     assertType<Promise<void>>(result);
+    assertType<(reason?: unknown) => void>(abort);
   });
 
   it("should call the function with a new context", async () => {
