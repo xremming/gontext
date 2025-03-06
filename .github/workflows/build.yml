@@ -23,6 +23,9 @@ jobs:
       - uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2
       - run: pnpm install
       - run: pnpm run test
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
     name: Build
