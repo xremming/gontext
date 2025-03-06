@@ -50,11 +50,11 @@ export const Context = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   compose: <T extends [setter: ContextSetter<any>, value: any][]>(
     ctx: Context,
-    setters: [...T]
+    setters: [...T],
   ): Context => {
     return setters.reduce(
       (ctx, [withValue, value]) => withValue(ctx, value),
-      ctx
+      ctx,
     );
   },
 
@@ -73,7 +73,7 @@ export const Context = {
    */
   withAbort: <T>(
     ctx: Context | null,
-    fn: (ctx: Context) => Promise<T>
+    fn: (ctx: Context) => Promise<T>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): [result: Promise<T>, abort: (reason?: any) => void] => {
     ctx = ctx ?? Context.TODO();
@@ -86,7 +86,7 @@ export const Context = {
 
     const abort = abortController.abort.bind(abortController) as (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      reason?: any
+      reason?: any,
     ) => void;
 
     if (prevAbortController) {
@@ -100,7 +100,7 @@ export const Context = {
         Context.compose(ctx, [
           [withAbortController, abortController],
           [withSignal, abortController.signal],
-        ])
+        ]),
       ).finally(abort),
       abort,
     ];
@@ -154,22 +154,22 @@ const withValue = <T>(ctx: Context | null, key: symbol, value: T): Context => {
 
 export function make<T>(): [getter: ContextGetter<T>, setter: ContextSetter<T>];
 export function make<T>(
-  name: string
+  name: string,
 ): [getter: ContextGetter<T>, setter: ContextSetter<T>];
 export function make<T>(
-  defaultValue: (ctx: Context | null) => T
+  defaultValue: (ctx: Context | null) => T,
 ): [getter: ContextGetterWithDefault<T>, setter: ContextSetterWithDefault<T>];
 export function make<T>(
   name: string,
-  defaultValue: (ctx: Context | null) => T
+  defaultValue: (ctx: Context | null) => T,
 ): [getter: ContextGetterWithDefault<T>, setter: ContextSetterWithDefault<T>];
 
 export function make<T>(
   arg1?: string | ((ctx: Context | null) => T),
-  arg2?: ((ctx: Context | null) => T) | undefined
+  arg2?: ((ctx: Context | null) => T) | undefined,
 ): [
   getter: ContextGetter<T> | ContextGetterWithDefault<T>,
-  setter: ContextSetter<T> | ContextSetterWithDefault<T>
+  setter: ContextSetter<T> | ContextSetterWithDefault<T>,
 ] {
   const name = typeof arg1 === "string" ? arg1 : undefined;
   const defaultValue = typeof arg1 === "function" ? arg1 : arg2;
