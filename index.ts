@@ -152,19 +152,22 @@ const withValue = <T>(ctx: Context | null, key: symbol, value: T): Context => {
   };
 };
 
-export function make<T>(): [getter: ContextGetter<T>, setter: ContextSetter<T>];
-export function make<T>(
+export function make<T0, T extends NonNullable<T0> = NonNullable<T0>>(): [
+  getter: ContextGetter<T>,
+  setter: ContextSetter<T>,
+];
+export function make<T0, T extends NonNullable<T0> = NonNullable<T0>>(
   name: string,
 ): [getter: ContextGetter<T>, setter: ContextSetter<T>];
-export function make<T>(
+export function make<T0, T extends NonNullable<T0> = NonNullable<T0>>(
   defaultValue: (ctx: Context | null) => T,
 ): [getter: ContextGetterWithDefault<T>, setter: ContextSetterWithDefault<T>];
-export function make<T>(
+export function make<T0, T extends NonNullable<T0> = NonNullable<T0>>(
   name: string,
   defaultValue: (ctx: Context | null) => T,
 ): [getter: ContextGetterWithDefault<T>, setter: ContextSetterWithDefault<T>];
 
-export function make<T>(
+export function make<T0, T extends NonNullable<T0> = NonNullable<T0>>(
   arg1?: string | ((ctx: Context | null) => T),
   arg2?: ((ctx: Context | null) => T) | undefined,
 ): [

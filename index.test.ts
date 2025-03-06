@@ -218,6 +218,18 @@ describe("make", () => {
     const ctx = setter(Context.TODO(), new Map([["key", 42]]));
     assert.deepEqual(getter(ctx), new Map([["key", 42]]));
   });
+
+  it("should remove null from the type", () => {
+    const [get, set] = make<number | null>();
+    assertType<ContextGetter<number>>(get);
+    assertType<ContextSetter<number>>(set);
+  });
+
+  it("should remove undefined from the type", () => {
+    const [get, set] = make<number | undefined>();
+    assertType<ContextGetter<number>>(get);
+    assertType<ContextSetter<number>>(set);
+  });
 });
 
 describe("getSignal", () => {
