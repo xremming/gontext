@@ -232,6 +232,12 @@ describe("make", () => {
     assertType<ContextGetter<number>>(get);
     assertType<ContextSetter<number>>(set);
   });
+
+  it("should have a getter that works with null context", () => {
+    const [get, _set] = make<number>();
+    const value = get(null);
+    assert.strictEqual(value, undefined);
+  });
 });
 
 describe("getSignal", () => {
