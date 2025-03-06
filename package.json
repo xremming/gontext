@@ -9,7 +9,12 @@
   },
   "scripts": {
     "test": "vitest --typecheck",
-    "lint": "eslint index.ts index.test.ts",
+    "lint": "pnpm run --sequential --no-bail /^lint:/",
+    "lint:eslint": "eslint index.ts index.test.ts",
+    "lint:prettier": "prettier --check index.ts index.test.ts eslint.config.mjs package.json tsconfig.json",
+    "fix": "pnpm run --sequential --no-bail /^fix:/",
+    "fix:eslint": "eslint --fix index.ts index.test.ts",
+    "fix:prettier": "prettier --write index.ts index.test.ts eslint.config.mjs package.json tsconfig.json",
     "build": "tsc"
   },
   "keywords": [
@@ -24,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "9.21.0",
     "eslint": "9.21.0",
+    "prettier": "^3.5.3",
     "typescript": "5.8.2",
     "typescript-eslint": "8.26.0",
     "vitest": "3.0.7"
