@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: jdx/mise-action@13abe502c30c1559a5c37dff303831bab82c9402 # v2
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
       - run: pnpm install
       - run: pnpm run lint
 
@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: jdx/mise-action@13abe502c30c1559a5c37dff303831bab82c9402 # v2
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
       - run: pnpm install
       - run: pnpm run test
       - uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5
@@ -33,6 +33,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: jdx/mise-action@13abe502c30c1559a5c37dff303831bab82c9402 # v2
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
       - run: pnpm install
       - run: pnpm run build
